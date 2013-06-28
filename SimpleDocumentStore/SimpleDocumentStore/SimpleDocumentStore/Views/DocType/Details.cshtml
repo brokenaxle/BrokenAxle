@@ -1,0 +1,36 @@
+﻿@model SimpleDocumentStore.Models.DocType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DocType</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocTypeDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocTypeDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EffectiveDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EffectiveDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsEnabled)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsEnabled)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

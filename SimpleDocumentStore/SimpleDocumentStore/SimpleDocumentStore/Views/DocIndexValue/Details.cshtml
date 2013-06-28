@@ -1,0 +1,57 @@
+﻿@model SimpleDocumentStore.Models.DocIndexValue
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DocIndexValue</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocIndex.DocIndexFieldName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocIndex.DocIndexFieldName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocIndexValueField)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocIndexValueField)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Doc.SystemDocId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Doc.SystemDocId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateUser)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateUser)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SystemGuid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SystemGuid)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

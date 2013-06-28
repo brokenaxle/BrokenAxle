@@ -1,0 +1,117 @@
+﻿@model SimpleDocumentStore.Models.Doc
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Doc</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SystemGuid)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SystemGuid)
+            @Html.ValidationMessageFor(model => model.SystemGuid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SystemDocId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SystemDocId)
+            @Html.ValidationMessageFor(model => model.SystemDocId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocTypeId, "DocType")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DocTypeId", String.Empty)
+            @Html.ValidationMessageFor(model => model.DocTypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FilePath)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FilePath)
+            @Html.ValidationMessageFor(model => model.FilePath)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FileType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FileType)
+            @Html.ValidationMessageFor(model => model.FileType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FileName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FileName)
+            @Html.ValidationMessageFor(model => model.FileName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateDate)
+            @Html.ValidationMessageFor(model => model.CreateDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateUser)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateUser)
+            @Html.ValidationMessageFor(model => model.CreateUser)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateDate)
+            @Html.ValidationMessageFor(model => model.UpdateDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateUser)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateUser)
+            @Html.ValidationMessageFor(model => model.UpdateUser)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsDeleted)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsDeleted)
+            @Html.ValidationMessageFor(model => model.IsDeleted)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

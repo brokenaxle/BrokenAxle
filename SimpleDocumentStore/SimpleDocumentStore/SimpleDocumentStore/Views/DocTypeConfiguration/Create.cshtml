@@ -1,0 +1,67 @@
+﻿@model SimpleDocumentStore.Models.DocTypeConfiguration
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DocTypeConfiguration</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocTypeId, "DocType")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DocTypeId", String.Empty)
+            @Html.ValidationMessageFor(model => model.DocTypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocIndexId, "DocIndex")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DocIndexId", String.Empty)
+            @Html.ValidationMessageFor(model => model.DocIndexId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsRequired)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsRequired)
+            @Html.ValidationMessageFor(model => model.IsRequired)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DisplayOrder)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DisplayOrder)
+            @Html.ValidationMessageFor(model => model.DisplayOrder)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsActive)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

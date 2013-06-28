@@ -1,0 +1,50 @@
+﻿@model SimpleDocumentStore.Models.DocTypeConfiguration
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DocTypeConfiguration</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocType.DocTypeDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocType.DocTypeDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocIndex.DocIndexFieldName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocIndex.DocIndexFieldName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsRequired)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsRequired)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DisplayOrder)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DisplayOrder)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsActive)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsActive)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

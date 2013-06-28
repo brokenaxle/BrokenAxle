@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="500ffa6ee2514c33aa775024b2341fb4" Name="Diagram1">
+        <EntityTypeShape EntityType="SimpleDocumentStoreModel.Doc" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimpleDocumentStoreModel.DocIndex" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimpleDocumentStoreModel.DocIndexValue" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimpleDocumentStoreModel.DocType" Width="1.5" PointX="1.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimpleDocumentStoreModel.DocTypeConfiguration" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimpleDocumentStoreModel.sysdiagram" Width="1.5" PointX="3.75" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="SimpleDocumentStoreModel.FK_Doc_DocType" ManuallyRouted="false" />
+        <AssociationConnector Association="SimpleDocumentStoreModel.FK_DocIndexValue_Doc" ManuallyRouted="false" />
+        <AssociationConnector Association="SimpleDocumentStoreModel.FK_DocIndexValue_DocIndex" ManuallyRouted="false" />
+        <AssociationConnector Association="SimpleDocumentStoreModel.FK_DocTypeConfiguration_DocIndex" ManuallyRouted="false" />
+        <AssociationConnector Association="SimpleDocumentStoreModel.FK_DocTypeConfiguration_DocType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

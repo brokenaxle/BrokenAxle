@@ -1,0 +1,43 @@
+﻿@model SimpleDocumentStore.Models.DocIndex
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DocIndex</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocIndexFieldName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocIndexFieldName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocIndexDataType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocIndexDataType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateUser)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateUser)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

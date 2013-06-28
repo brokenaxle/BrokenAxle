@@ -1,0 +1,51 @@
+﻿@model SimpleDocumentStore.Models.DocType
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DocType</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocTypeDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DocTypeDescription)
+            @Html.ValidationMessageFor(model => model.DocTypeDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EffectiveDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EffectiveDate)
+            @Html.ValidationMessageFor(model => model.EffectiveDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsEnabled)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsEnabled)
+            @Html.ValidationMessageFor(model => model.IsEnabled)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

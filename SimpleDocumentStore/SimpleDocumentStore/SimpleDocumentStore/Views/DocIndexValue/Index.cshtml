@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SimpleDocumentStore.Models.DocIndexValue>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DocIndex.DocIndexFieldName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocIndexValueField)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doc.SystemDocId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SystemGuid)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocIndex.DocIndexFieldName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocIndexValueField)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doc.SystemDocId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SystemGuid)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

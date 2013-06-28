@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SimpleDocumentStoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="SimpleDocumentStoreModelStoreContainer">
+          <EntitySet Name="Doc" EntityType="SimpleDocumentStoreModel.Store.Doc" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DocIndex" EntityType="SimpleDocumentStoreModel.Store.DocIndex" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DocIndexValue" EntityType="SimpleDocumentStoreModel.Store.DocIndexValue" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DocType" EntityType="SimpleDocumentStoreModel.Store.DocType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DocTypeConfiguration" EntityType="SimpleDocumentStoreModel.Store.DocTypeConfiguration" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="SimpleDocumentStoreModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Doc_DocType" Association="SimpleDocumentStoreModel.Store.FK_Doc_DocType">
+            <End Role="DocType" EntitySet="DocType" />
+            <End Role="Doc" EntitySet="Doc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocIndexValue_Doc" Association="SimpleDocumentStoreModel.Store.FK_DocIndexValue_Doc">
+            <End Role="Doc" EntitySet="Doc" />
+            <End Role="DocIndexValue" EntitySet="DocIndexValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocIndexValue_DocIndex" Association="SimpleDocumentStoreModel.Store.FK_DocIndexValue_DocIndex">
+            <End Role="DocIndex" EntitySet="DocIndex" />
+            <End Role="DocIndexValue" EntitySet="DocIndexValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocTypeConfiguration_DocIndex" Association="SimpleDocumentStoreModel.Store.FK_DocTypeConfiguration_DocIndex">
+            <End Role="DocIndex" EntitySet="DocIndex" />
+            <End Role="DocTypeConfiguration" EntitySet="DocTypeConfiguration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocTypeConfiguration_DocType" Association="SimpleDocumentStoreModel.Store.FK_DocTypeConfiguration_DocType">
+            <End Role="DocType" EntitySet="DocType" />
+            <End Role="DocTypeConfiguration" EntitySet="DocTypeConfiguration" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Doc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SystemGuid" Type="uniqueidentifier" />
+          <Property Name="SystemDocId" Type="varchar" MaxLength="255" />
+          <Property Name="DocTypeId" Type="int" />
+          <Property Name="DocBinary" Type="image" />
+          <Property Name="FilePath" Type="varchar" MaxLength="255" />
+          <Property Name="FileType" Type="varchar" MaxLength="50" />
+          <Property Name="FileName" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateUser" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="DocIndex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DocIndexFieldName" Type="varchar" MaxLength="255" />
+          <Property Name="DocIndexDataType" Type="varchar" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DocIndexValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DocIndexId" Type="int" />
+          <Property Name="DocIndexValueField" Type="varchar" MaxLength="255" />
+          <Property Name="DocId" Type="int" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="SystemGuid" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DocType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DocTypeDescription" Type="varchar" MaxLength="255" />
+          <Property Name="EffectiveDate" Type="datetime" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocTypeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DocTypeId" Type="int" />
+          <Property Name="DocIndexId" Type="int" />
+          <Property Name="IsRequired" Type="bit" Nullable="false" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Doc_DocType">
+          <End Role="DocType" Type="SimpleDocumentStoreModel.Store.DocType" Multiplicity="0..1" />
+          <End Role="Doc" Type="SimpleDocumentStoreModel.Store.Doc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Doc">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocIndexValue_Doc">
+          <End Role="Doc" Type="SimpleDocumentStoreModel.Store.Doc" Multiplicity="0..1" />
+          <End Role="DocIndexValue" Type="SimpleDocumentStoreModel.Store.DocIndexValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocIndexValue">
+              <PropertyRef Name="DocId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocIndexValue_DocIndex">
+          <End Role="DocIndex" Type="SimpleDocumentStoreModel.Store.DocIndex" Multiplicity="0..1" />
+          <End Role="DocIndexValue" Type="SimpleDocumentStoreModel.Store.DocIndexValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocIndex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocIndexValue">
+              <PropertyRef Name="DocIndexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocTypeConfiguration_DocIndex">
+          <End Role="DocIndex" Type="SimpleDocumentStoreModel.Store.DocIndex" Multiplicity="0..1" />
+          <End Role="DocTypeConfiguration" Type="SimpleDocumentStoreModel.Store.DocTypeConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocIndex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocTypeConfiguration">
+              <PropertyRef Name="DocIndexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocTypeConfiguration_DocType">
+          <End Role="DocType" Type="SimpleDocumentStoreModel.Store.DocType" Multiplicity="0..1" />
+          <End Role="DocTypeConfiguration" Type="SimpleDocumentStoreModel.Store.DocTypeConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocTypeConfiguration">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SimpleDocumentStoreModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SimpleDocumentStoreEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Docs" EntityType="SimpleDocumentStoreModel.Doc" />
+          <EntitySet Name="DocIndexes" EntityType="SimpleDocumentStoreModel.DocIndex" />
+          <EntitySet Name="DocIndexValues" EntityType="SimpleDocumentStoreModel.DocIndexValue" />
+          <EntitySet Name="DocTypes" EntityType="SimpleDocumentStoreModel.DocType" />
+          <EntitySet Name="DocTypeConfigurations" EntityType="SimpleDocumentStoreModel.DocTypeConfiguration" />
+          <EntitySet Name="sysdiagrams" EntityType="SimpleDocumentStoreModel.sysdiagram" />
+          <AssociationSet Name="FK_Doc_DocType" Association="SimpleDocumentStoreModel.FK_Doc_DocType">
+            <End Role="DocType" EntitySet="DocTypes" />
+            <End Role="Doc" EntitySet="Docs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocIndexValue_Doc" Association="SimpleDocumentStoreModel.FK_DocIndexValue_Doc">
+            <End Role="Doc" EntitySet="Docs" />
+            <End Role="DocIndexValue" EntitySet="DocIndexValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocIndexValue_DocIndex" Association="SimpleDocumentStoreModel.FK_DocIndexValue_DocIndex">
+            <End Role="DocIndex" EntitySet="DocIndexes" />
+            <End Role="DocIndexValue" EntitySet="DocIndexValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocTypeConfiguration_DocIndex" Association="SimpleDocumentStoreModel.FK_DocTypeConfiguration_DocIndex">
+            <End Role="DocIndex" EntitySet="DocIndexes" />
+            <End Role="DocTypeConfiguration" EntitySet="DocTypeConfigurations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocTypeConfiguration_DocType" Association="SimpleDocumentStoreModel.FK_DocTypeConfiguration_DocType">
+            <End Role="DocType" EntitySet="DocTypes" />
+            <End Role="DocTypeConfiguration" EntitySet="DocTypeConfigurations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Doc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemGuid" Type="Guid" />
+          <Property Name="SystemDocId" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="DocTypeId" Type="Int32" />
+          <Property Name="DocBinary" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FilePath" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="FileType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FileName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="DocType" Relationship="SimpleDocumentStoreModel.FK_Doc_DocType" FromRole="Doc" ToRole="DocType" />
+          <NavigationProperty Name="DocIndexValues" Relationship="SimpleDocumentStoreModel.FK_DocIndexValue_Doc" FromRole="Doc" ToRole="DocIndexValue" />
+        </EntityType>
+        <EntityType Name="DocIndex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DocIndexFieldName" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="DocIndexDataType" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="DocIndexValues" Relationship="SimpleDocumentStoreModel.FK_DocIndexValue_DocIndex" FromRole="DocIndex" ToRole="DocIndexValue" />
+          <NavigationProperty Name="DocTypeConfigurations" Relationship="SimpleDocumentStoreModel.FK_DocTypeConfiguration_DocIndex" FromRole="DocIndex" ToRole="DocTypeConfiguration" />
+        </EntityType>
+        <EntityType Name="DocIndexValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DocIndexId" Type="Int32" />
+          <Property Name="DocIndexValueField" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="DocId" Type="Int32" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="SystemGuid" Type="Guid" />
+          <NavigationProperty Name="Doc" Relationship="SimpleDocumentStoreModel.FK_DocIndexValue_Doc" FromRole="DocIndexValue" ToRole="Doc" />
+          <NavigationProperty Name="DocIndex" Relationship="SimpleDocumentStoreModel.FK_DocIndexValue_DocIndex" FromRole="DocIndexValue" ToRole="DocIndex" />
+        </EntityType>
+        <EntityType Name="DocType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DocTypeDescription" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="EffectiveDate" Type="DateTime" Precision="3" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Docs" Relationship="SimpleDocumentStoreModel.FK_Doc_DocType" FromRole="DocType" ToRole="Doc" />
+          <NavigationProperty Name="DocTypeConfigurations" Relationship="SimpleDocumentStoreModel.FK_DocTypeConfiguration_DocType" FromRole="DocType" ToRole="DocTypeConfiguration" />
+        </EntityType>
+        <EntityType Name="DocTypeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DocTypeId" Type="Int32" />
+          <Property Name="DocIndexId" Type="Int32" />
+          <Property Name="IsRequired" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="DocIndex" Relationship="SimpleDocumentStoreModel.FK_DocTypeConfiguration_DocIndex" FromRole="DocTypeConfiguration" ToRole="DocIndex" />
+          <NavigationProperty Name="DocType" Relationship="SimpleDocumentStoreModel.FK_DocTypeConfiguration_DocType" FromRole="DocTypeConfiguration" ToRole="DocType" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Doc_DocType">
+          <End Role="DocType" Type="SimpleDocumentStoreModel.DocType" Multiplicity="0..1" />
+          <End Role="Doc" Type="SimpleDocumentStoreModel.Doc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Doc">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocIndexValue_Doc">
+          <End Role="Doc" Type="SimpleDocumentStoreModel.Doc" Multiplicity="0..1" />
+          <End Role="DocIndexValue" Type="SimpleDocumentStoreModel.DocIndexValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocIndexValue">
+              <PropertyRef Name="DocId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocIndexValue_DocIndex">
+          <End Role="DocIndex" Type="SimpleDocumentStoreModel.DocIndex" Multiplicity="0..1" />
+          <End Role="DocIndexValue" Type="SimpleDocumentStoreModel.DocIndexValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocIndex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocIndexValue">
+              <PropertyRef Name="DocIndexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocTypeConfiguration_DocIndex">
+          <End Role="DocIndex" Type="SimpleDocumentStoreModel.DocIndex" Multiplicity="0..1" />
+          <End Role="DocTypeConfiguration" Type="SimpleDocumentStoreModel.DocTypeConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocIndex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocTypeConfiguration">
+              <PropertyRef Name="DocIndexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocTypeConfiguration_DocType">
+          <End Role="DocType" Type="SimpleDocumentStoreModel.DocType" Multiplicity="0..1" />
+          <End Role="DocTypeConfiguration" Type="SimpleDocumentStoreModel.DocTypeConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocTypeConfiguration">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SimpleDocumentStoreModelStoreContainer" CdmEntityContainer="SimpleDocumentStoreEntities">
+          <EntitySetMapping Name="Docs">
+            <EntityTypeMapping TypeName="SimpleDocumentStoreModel.Doc">
+              <MappingFragment StoreEntitySet="Doc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SystemGuid" ColumnName="SystemGuid" />
+                <ScalarProperty Name="SystemDocId" ColumnName="SystemDocId" />
+                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
+                <ScalarProperty Name="DocBinary" ColumnName="DocBinary" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocIndexes">
+            <EntityTypeMapping TypeName="SimpleDocumentStoreModel.DocIndex">
+              <MappingFragment StoreEntitySet="DocIndex">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DocIndexFieldName" ColumnName="DocIndexFieldName" />
+                <ScalarProperty Name="DocIndexDataType" ColumnName="DocIndexDataType" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocIndexValues">
+            <EntityTypeMapping TypeName="SimpleDocumentStoreModel.DocIndexValue">
+              <MappingFragment StoreEntitySet="DocIndexValue">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DocIndexId" ColumnName="DocIndexId" />
+                <ScalarProperty Name="DocIndexValueField" ColumnName="DocIndexValueField" />
+                <ScalarProperty Name="DocId" ColumnName="DocId" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="SystemGuid" ColumnName="SystemGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocTypes">
+            <EntityTypeMapping TypeName="SimpleDocumentStoreModel.DocType">
+              <MappingFragment StoreEntitySet="DocType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DocTypeDescription" ColumnName="DocTypeDescription" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocTypeConfigurations">
+            <EntityTypeMapping TypeName="SimpleDocumentStoreModel.DocTypeConfiguration">
+              <MappingFragment StoreEntitySet="DocTypeConfiguration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
+                <ScalarProperty Name="DocIndexId" ColumnName="DocIndexId" />
+                <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SimpleDocumentStoreModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
